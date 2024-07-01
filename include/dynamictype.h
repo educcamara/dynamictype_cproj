@@ -20,6 +20,16 @@ typedef struct DynamicType tDynamicType;
  *
  * @return A pointer to the created dynamic type
  */
-tDynamicType *create_dynamic_type();
+tDynamicType *create_dynamic_type(const char *type_name);
+
+/**
+ * @brief Adds a field to a dynamic type
+ *
+ * @param dynamictype The dynamic type to add the field
+ * @param name The name of the field
+ * @param type The type of the field
+ * @param data The data of the field
+ */
+void add_field(tDynamicType *dynamictype, char *name, char *type, void *data);
 
 #endif //DYNAMICTYPE_H
