@@ -15,4 +15,11 @@ typedef struct Field tField;
  */
 typedef struct DynamicType tDynamicType;
 
+/**
+ * @brief Creates a dynamic type
+ *
+ * @return A pointer to the created dynamic type
+ */
+tDynamicType *create_dynamic_type();
+
 #endif //DYNAMICTYPE_H
