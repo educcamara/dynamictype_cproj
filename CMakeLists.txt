@@ -10,6 +10,7 @@ find_library(ARVOREBINARIA_LIB arvorebinaria PATHS /usr/local/lib)
 find_library(HASH_LIB hash PATHS /usr/local/lib)
 include_directories(/usr/local/include/custom)
 
-add_executable(dynamictype src/main.c
-        src/dynamictype.c
-        include/dynamictype.h)
+# Main Executable
+add_executable(dynamictype
+        src/main.c
+        src/dynamictype.c)
