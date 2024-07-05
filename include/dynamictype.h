@@ -5,15 +5,28 @@
 #ifndef DYNAMICTYPE_H
 #define DYNAMICTYPE_H
 
+#include <hash.h>
+
+#define MAX_FIELDS 16
+#define MAX_DATA 256
+
 /**
  * @brief Struct that represents a field of a dynamic type
  */
-typedef struct Field tField;
+typedef struct Field {
+ char name[20]; /** Name of the field */
+ char type[20]; /** Type of the field */
+ void *data; /** Data of the field */
+} tField;
 
 /**
  * @brief Struct that represents a dynamic type
  */
-typedef struct DynamicType tDynamicType;
+typedef struct DynamicType {
+ char name[20]; /** Name of the dynamic type */
+ tField fields[MAX_FIELDS]; /** Fields of the dynamic type */
+ unsigned n_fields; /** Number of fields */
+} tDynamicType;
 
 /**
  * @brief Creates a dynamic type

@@ -6,21 +6,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define MAX_FIELDS 16
-#define MAX_DATA 256
-
-struct Field {
-    char name[20]; /** Name of the field */
-    char type[20]; /** Type of the field */
-    void *data; /** Data of the field */
-};
-
-struct DynamicType {
-    char name[20]; /** Name of the dynamic type */
-    tField fields[MAX_FIELDS]; /** Fields of the dynamic type */
-    unsigned n_fields; /** Number of fields */
-};
-
 tDynamicType *create_dynamic_type(const char *type_name) {
     tDynamicType *dynamictype = (tDynamicType *) malloc(sizeof(tDynamicType));
 
