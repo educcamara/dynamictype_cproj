@@ -14,3 +14,7 @@ include_directories(/usr/local/include/custom)
 add_executable(dynamictype
         src/main.c
         src/dynamictype.c)
+
+# Configuring Tests
+enable_testing()
+add_subdirectory(tests)
