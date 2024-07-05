@@ -28,3 +28,9 @@ void add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
 
     dynamictype->n_fields++;
 }
+
+void *get_field(tDynamicType *dynamictype, const char *name) {
+    tField *field = (tField *) buscar_Hash(dynamictype->fields, name);
+
+    return field != NULL ? field->data : NULL;
+}

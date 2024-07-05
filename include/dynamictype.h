@@ -42,4 +42,14 @@ tDynamicType *create_dynamic_type(const char *type_name);
  */
 void add_field(tDynamicType *dynamictype, char *name, char *type, void *data);
 
+/**
+ * @brief Gets a field from a dynamic type
+ *
+ * @param dynamictype The dynamic type to get the field
+ * @param name The name of the field
+ *
+ * @return The data of the field or NULL if the field is not found
+ */
+void *get_field(tDynamicType *dynamictype, const char *name);
+
 #endif //DYNAMICTYPE_H
