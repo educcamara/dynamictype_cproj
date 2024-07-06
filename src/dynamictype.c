@@ -86,6 +86,19 @@ unsigned char add_field_data_dynamic_type(tDynamicType *dynamictype, const char 
     return 1;
 }
 
+void free_dynamic_type_template(tDynamicTypeTemplate *dynamictemplate) {
+    tElem_LSE *aux = dynamictemplate->fields->prim;
+    while (aux != NULL) {
+        tFieldTemplate *field = (tFieldTemplate *) aux->carga_util;
+        free(field);
+
+        aux = aux->prox;
+    }
+
+    destruir_lse(dynamictemplate->fields);
+    free(dynamictemplate);
+}
+
 void free_dynamic_type(tDynamicType *dynamictype) {
     tElem_LSE *aux = dynamictype->fields->prim;
     while (aux != NULL) {

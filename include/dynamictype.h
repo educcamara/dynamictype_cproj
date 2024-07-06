@@ -89,6 +89,13 @@ tField *get_field_dynamic_type(tDynamicType *dynamictype, const char *name);
 unsigned char add_field_data_dynamic_type(tDynamicType *dynamictype, const char *name, void *data);
 
 /**
+ * @brief Frees a dynamic type template
+ *
+ * @param dynamictemplate The dynamic type template to be freed
+ */
+void free_dynamic_type_template(tDynamicTypeTemplate *dynamictemplate);
+
+/**
  * @brief Frees a dynamic type
  *
  * @param dynamictype The dynamic type to be freed
