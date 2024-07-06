@@ -8,11 +8,26 @@
 #include <lista_se.h>
 
 /**
+ * @brief Struct that represents a field template
+ */
+typedef struct FieldTemplate {
+    char name[20]; /** Name of the field template */
+    char type[20]; /** Type of the field template */
+} tFieldTemplate;
+
+/**
+ * @brief Struct that represents a dynamic type template
+ */
+typedef struct DynamicTypeTemplate {
+    char name[20]; /** Name of the dynamic type template */
+    tLSE *fields; /** Template fields of the dynamic type template */
+} tDinamicTypeTemplate;
+
+/**
  * @brief Struct that represents a field of a dynamic type
  */
 typedef struct Field {
-    char name[20]; /** Name of the field */
-    char type[20]; /** Type of the field */
+    tLSE *template; /** Template of the field */
     void *data; /** Data of the field */
 } tField;
 
@@ -20,7 +35,7 @@ typedef struct Field {
  * @brief Struct that represents a dynamic type
  */
 typedef struct DynamicType {
-    char name[20]; /** Name of the dynamic type */
+    tDinamicTypeTemplate *template; /** Template of the dynamic type */
     tLSE *fields; /** Fields of the dynamic type */
 } tDynamicType;
 
