@@ -49,8 +49,9 @@ unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void 
  * @param dynamictype The dynamic type to get the field
  * @param name The name of the field
  *
- * @return The data of the field or NULL if the field is not found
+ * @return A pointer to the field itself or NULL if the field is not found
+ *
  */
-void *get_field(tDynamicType *dynamictype, const char *name);
+tField *get_field(tDynamicType *dynamictype, const char *name);
 
 #endif //DYNAMICTYPE_H

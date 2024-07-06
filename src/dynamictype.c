@@ -38,8 +38,6 @@ unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void 
     return 1;
 }
 
-void *get_field(tDynamicType *dynamictype, const char *name) {
-    tField *field = (tField *) buscar_elem_lse(dynamictype->fields, (void *) name);
-
-    return field != NULL ? field->data : NULL;
+tField *get_field(tDynamicType *dynamictype, const char *name) {
+    return (tField *) buscar_elem_lse(dynamictype->fields, (void *) name);
 }
