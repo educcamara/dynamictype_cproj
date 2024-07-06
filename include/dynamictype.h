@@ -58,11 +58,13 @@ tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template);
 /**
  * @brief Adds a field template to a dynamic type template
  *
- * @param dynamictype The dynamic type template to add the field template
+ * @param dynamictemplate The dynamic type template to add the field template
  * @param name The name of the field template
  * @param type The type of the field template
+ *
+ * @return a boolean indicating if the field template was added successfully
  */
-void add_field_template(tDynamicTypeTemplate *dynamictype, const char *name, const char *type);
+unsigned char add_field_template(tDynamicTypeTemplate *dynamictemplate, const char *name, const char *type);
 
 /**
  * @brief Adds a field to a dynamic type
