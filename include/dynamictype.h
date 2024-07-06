@@ -75,6 +75,17 @@ unsigned char add_field_template(tDynamicTypeTemplate *dynamictemplate, const ch
  * @return A pointer to the field itself or NULL if the field is not found
  *
  */
-tField *get_field(tDynamicType *dynamictype, const char *name);
+tField *get_field_dynamic_type(tDynamicType *dynamictype, const char *name);
+
+/**
+ * @brief Adds data to a field of a dynamic type
+ *
+ * @param dynamictype The dynamic type to add the data
+ * @param name The name of the field
+ * @param data The data to be added
+ *
+ * @return a boolean indicating if the data was added successfully
+ */
+unsigned char add_field_data_dynamic_type(tDynamicType *dynamictype, const char *name, void *data);
 
 #endif //DYNAMICTYPE_H
