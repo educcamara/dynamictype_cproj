@@ -15,6 +15,7 @@ include_directories(/usr/local/include/custom)
 add_executable(dynamictype
         src/main.c
         src/dynamictype.c)
+target_link_libraries(dynamictype ${HASH_LIB} ${ARVOREBINARIA_LIB} ${LISTAENCADEADA_LIB})
 
 # Configuring Tests
 enable_testing()
