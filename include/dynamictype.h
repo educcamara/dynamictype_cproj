@@ -40,6 +40,15 @@ typedef struct DynamicType {
 } tDynamicType;
 
 /**
+ * @brief Creates a dynamic type template
+ *
+ * @param name The name of the dynamic type template
+ *
+ * @return A pointer to the created dynamic type template
+ */
+tDinamicTypeTemplate *create_dynamic_type_template(const char *name);
+
+/**
  * @brief Creates a dynamic type
  *
  * @return A pointer to the created dynamic type
