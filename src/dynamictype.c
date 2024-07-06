@@ -78,7 +78,13 @@ tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template) {
 }
 
 tField *get_field_dynamic_type(tDynamicType *dynamictype, const char *name) {
-    return (tField *) buscar_elem_lse(dynamictype->fields, (void *) name);
+    tFieldTemplate *field_template = __get_field_template(dynamictype->template, name);
+    if (field_template == NULL) { return NULL; }
+
+    tField tmp;
+    tmp.template = field_template;
+
+    return (tField *) buscar_elem_lse(dynamictype->fields, &tmp);
 }
 
 unsigned char add_field_data_dynamic_type(tDynamicType *dynamictype, const char *name, void *data) {
