@@ -6,11 +6,20 @@
 #include <string.h>
 #include <stdlib.h>
 
-static int __compare_fields(void *a, void *b) {
-    tField *field_a = (tField *) a;
-    tField *field_b = (tField *) b;
+static int __compare_field_templates(void *a, void *b) {
+    tFieldTemplate *field_a = (tFieldTemplate *) a;
+    tFieldTemplate *field_b = (tFieldTemplate *) b;
 
     return strcmp(field_a->name, field_b->name);
+}
+
+tDinamicTypeTemplate *create_dynamic_type_template(const char *name) {
+    tDinamicTypeTemplate *dynamictype = (tDinamicTypeTemplate *) malloc(sizeof(tDinamicTypeTemplate));
+
+    strncpy(dynamictype->name, name, sizeof(char) * 20);
+    dynamictype->fields = criar_lse(__compare_field_templates, NULL);
+
+    return dynamictype;
 }
 
 tDynamicType *create_dynamic_type(const char *type_name) {
