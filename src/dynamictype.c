@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-static int __compare_fields(const void *a, const void *b) {
+static int __compare_fields(void *a, void *b) {
     tField *field_a = (tField *) a;
     tField *field_b = (tField *) b;
 
