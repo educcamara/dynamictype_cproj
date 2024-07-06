@@ -67,18 +67,6 @@ tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template);
 unsigned char add_field_template(tDynamicTypeTemplate *dynamictemplate, const char *name, const char *type);
 
 /**
- * @brief Adds a field to a dynamic type
- *
- * @param dynamictype The dynamic type to add the field
- * @param name The name of the field
- * @param type The type of the field
- * @param data The data of the field
- *
- * @return a boolean indicating if the field was added successfully
- */
-unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void *data);
-
-/**
  * @brief Gets a field from a dynamic type
  *
  * @param dynamictype The dynamic type to get the field

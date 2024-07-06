@@ -74,22 +74,6 @@ tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template) {
     return dynamictype;
 }
 
-unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
-    tLSE *fields = dynamictype->fields;
-
-    if (get_field(dynamictype, name) != NULL) {
-        return 0;
-    }
-
-    tField *field = (tField *) malloc(sizeof(tField));
-    strcpy(field->name, name);
-    strcpy(field->type, type);
-    field->data = data;
-
-    inserir_final_lse(fields, field);
-    return 1;
-}
-
 tField *get_field(tDynamicType *dynamictype, const char *name) {
     return (tField *) buscar_elem_lse(dynamictype->fields, (void *) name);
 }
