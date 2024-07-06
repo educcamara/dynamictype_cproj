@@ -34,7 +34,7 @@ void add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
 }
 
 void *get_field(tDynamicType *dynamictype, const char *name) {
-    tField *field = (tField *) buscar_elem_lse(dynamictype->fields, name);
+    tField *field = (tField *) buscar_elem_lse(dynamictype->fields, (void *) name);
 
     return field != NULL ? field->data : NULL;
 }
