@@ -28,7 +28,21 @@ tDynamicTypeTemplate *custom_dynamic_template() {
 }
 
 void test_create_and_free_dynamic_type() {
+    tDynamicTypeTemplate *dynamictemplate = custom_dynamic_template();
+    tDynamicType *dynamictype = create_dynamic_type(dynamictemplate);
 
+    assert(dynamictype != NULL);
+    assert(strcmp(dynamictype->template->name, "Person") == 0);
+    assert(dynamictype->fields->tam == 2);
+    assert(dynamictype->fields->prim != NULL);
+    assert(dynamictype->fields->prim->carga_util != NULL);
+    assert(((tField*) dynamictype->fields->prim->carga_util)->template != NULL);
+    assert(((tField*) dynamictype->fields->prim->carga_util)->data == NULL);
+
+    free_dynamic_type(dynamictype);
+    free_dynamic_type_template(dynamictemplate);
+
+    printf("- create_dynamic_type() and free_dynamic_type() tests passed\n");
 }
 
 void test_add_field() {
