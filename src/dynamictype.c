@@ -6,11 +6,18 @@
 #include <string.h>
 #include <stdlib.h>
 
+static int __compare_fields(const void *a, const void *b) {
+    tField *field_a = (tField *) a;
+    tField *field_b = (tField *) b;
+
+    return strcmp(field_a->name, field_b->name);
+}
+
 tDynamicType *create_dynamic_type(const char *type_name) {
     tDynamicType *dynamictype = (tDynamicType *) malloc(sizeof(tDynamicType));
 
     strcpy(dynamictype->name, type_name);
-    dynamictype->fields = criar_lse(NULL, NULL);
+    dynamictype->fields = criar_lse(__compare_fields, NULL);
 
     return dynamictype;
 }
