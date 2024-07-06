@@ -23,7 +23,8 @@ static int __compare_fields(void *a, void *b) {
 tDynamicTypeTemplate *create_dynamic_type_template(const char *name) {
     tDynamicTypeTemplate *dynamictype = (tDynamicTypeTemplate *) malloc(sizeof(tDynamicTypeTemplate));
 
-    strncpy(dynamictype->name, name, sizeof(char) * 20);
+    strncpy(dynamictype->name, name, sizeof(char) * 19);
+    dynamictype->name[19] = '\0';
     dynamictype->fields = criar_lse(__compare_field_templates, NULL);
 
     return dynamictype;
@@ -38,8 +39,10 @@ unsigned char add_field_template(tDynamicTypeTemplate *dynamictemplate, const ch
 
     tFieldTemplate *field = (tFieldTemplate *) malloc(sizeof(tFieldTemplate));
 
-    strncpy(field->name, name, sizeof(char) * 20);
-    strncpy(field->type, type, sizeof(char) * 20);
+    strncpy(field->name, name, sizeof(char) * 19);
+    strncpy(field->type, type, sizeof(char) * 19);
+    field->name[19] = '\0';
+    field->type[19] = '\0';
 
     inserir_final_lse(dynamictemplate->fields, field);
     return 1;
