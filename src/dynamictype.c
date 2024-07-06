@@ -29,20 +29,27 @@ tDynamicTypeTemplate *create_dynamic_type_template(const char *name) {
     return dynamictype;
 }
 
-void add_field_template(tDynamicTypeTemplate *dynamictype, const char *name, const char *type) {
+static tFieldTemplate *__get_field_template(tDynamicTypeTemplate *dynamictemplate, const char *name) {
+    return (tFieldTemplate *) buscar_elem_lse(dynamictemplate->fields, (void *) name);
+}
+
+unsigned char add_field_template(tDynamicTypeTemplate *dynamictemplate, const char *name, const char *type) {
+    if (__get_field_template(dynamictemplate, name) != NULL) { return 0; }
+
     tFieldTemplate *field = (tFieldTemplate *) malloc(sizeof(tFieldTemplate));
 
     strncpy(field->name, name, sizeof(char) * 20);
     strncpy(field->type, type, sizeof(char) * 20);
 
-    inserir_final_lse(dynamictype->fields, field);
+    inserir_final_lse(dynamictemplate->fields, field);
+    return 1;
 }
 
-static tField *__create_field(tFieldTemplate *template, void *data) {
+static tField *__create_field(tFieldTemplate *template) {
     tField *field = (tField *) malloc(sizeof(tField));
 
     field->template = template;
-    field->data = data;
+    field->data = NULL;
 
     return field;
 }
@@ -57,7 +64,7 @@ tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template) {
     tElem_LSE *aux = template->fields->prim;
     while (aux != NULL) {
         tFieldTemplate *field_template = (tFieldTemplate *) aux->carga_util;
-        tField *field = __create_field(field_template, NULL);
+        tField *field = __create_field(field_template);
 
         inserir_final_lse(dynamictype->fields, field);
 
