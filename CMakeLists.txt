@@ -22,7 +22,7 @@ add_library(dynamictype STATIC
 # Library Installation
 install(TARGETS dynamictype
         LIBRARY DESTINATION /usr/local/lib)
-install(FILES include/lista_se.h
+install(FILES include/dynamictype.h
         DESTINATION /usr/local/include/custom)
 
 # Configuring Tests
