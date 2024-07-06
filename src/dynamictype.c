@@ -29,6 +29,15 @@ tDynamicTypeTemplate *create_dynamic_type_template(const char *name) {
     return dynamictype;
 }
 
+void add_field_template(tDynamicTypeTemplate *dynamictype, const char *name, const char *type) {
+    tFieldTemplate *field = (tFieldTemplate *) malloc(sizeof(tFieldTemplate));
+
+    strncpy(field->name, name, sizeof(char) * 20);
+    strncpy(field->type, type, sizeof(char) * 20);
+
+    inserir_final_lse(dynamictype->fields, field);
+}
+
 static tField *__create_field(tFieldTemplate *template, void *data) {
     tField *field = (tField *) malloc(sizeof(tField));
 
