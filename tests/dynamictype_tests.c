@@ -54,13 +54,13 @@ void test_get_field() {
     tDynamicType *dynamictype = create_dynamic_type("Person");
     add_field(dynamictype, "name", "char*", "John Doe");
 
-    tField *field = get_field(dynamictype, "name");
+    tField *field = get_field_dynamic_type(dynamictype, "name");
     assert(field != NULL);
     assert(strcmp(field->name, "name") == 0);
     assert(strcmp(field->type, "char*") == 0);
     assert(strcmp(field->data, "John Doe") == 0);
 
-    assert(get_field(dynamictype, "age") == NULL);
+    assert(get_field_dynamic_type(dynamictype, "age") == NULL);
 
     printf("- get_field() tests passed\n");
 }
