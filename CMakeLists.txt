@@ -7,6 +7,7 @@ include_directories(include)
 
 # Custom Libraries
 find_library(ARVOREBINARIA_LIB arvorebinaria PATHS /usr/local/lib)
+find_library(LISTAENCADEADA_LIB listaencadeada PATHS /usr/local/lib)
 find_library(HASH_LIB hash PATHS /usr/local/lib)
 include_directories(/usr/local/include/custom)
 
