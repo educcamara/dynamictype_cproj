@@ -21,13 +21,13 @@ typedef struct FieldTemplate {
 typedef struct DynamicTypeTemplate {
     char name[20]; /** Name of the dynamic type template */
     tLSE *fields; /** Template fields of the dynamic type template */
-} tDinamicTypeTemplate;
+} tDynamicTypeTemplate;
 
 /**
  * @brief Struct that represents a field of a dynamic type
  */
 typedef struct Field {
-    tLSE *template; /** Template of the field */
+    tFieldTemplate *template; /** Template of the field */
     void *data; /** Data of the field */
 } tField;
 
@@ -35,7 +35,7 @@ typedef struct Field {
  * @brief Struct that represents a dynamic type
  */
 typedef struct DynamicType {
-    tDinamicTypeTemplate *template; /** Template of the dynamic type */
+    tDynamicTypeTemplate *template; /** Template of the dynamic type */
     tLSE *fields; /** Fields of the dynamic type */
 } tDynamicType;
 
@@ -46,14 +46,14 @@ typedef struct DynamicType {
  *
  * @return A pointer to the created dynamic type template
  */
-tDinamicTypeTemplate *create_dynamic_type_template(const char *name);
+tDynamicTypeTemplate *create_dynamic_type_template(const char *name);
 
 /**
  * @brief Creates a dynamic type
  *
  * @return A pointer to the created dynamic type
  */
-tDynamicType *create_dynamic_type(const char *type_name);
+tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template);
 
 /**
  * @brief Adds a field to a dynamic type
