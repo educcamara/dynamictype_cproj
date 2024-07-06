@@ -10,27 +10,24 @@ tDynamicType *create_dynamic_type(const char *type_name) {
     tDynamicType *dynamictype = (tDynamicType *) malloc(sizeof(tDynamicType));
 
     strcpy(dynamictype->name, type_name);
-    dynamictype->fields = criar_Hash(NULL);
-    dynamictype->n_fields = 0;
+    dynamictype->fields = criar_lse(NULL, NULL);
 
     return dynamictype;
 }
 
 void add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
-    tTabelaHash *fields = dynamictype->fields;
+    tLSE *fields = dynamictype->fields;
 
     tField *field = (tField *) malloc(sizeof(tField));
     strcpy(field->name, name);
     strcpy(field->type, type);
     field->data = data;
 
-    inserir_Hash(fields, name, field);
-
-    dynamictype->n_fields++;
+    inserir_final_lse(fields, field);
 }
 
 void *get_field(tDynamicType *dynamictype, const char *name) {
-    tField *field = (tField *) buscar_Hash(dynamictype->fields, name);
+    tField *field = (tField *) buscar_elem_lse(dynamictype->fields, name);
 
     return field != NULL ? field->data : NULL;
 }

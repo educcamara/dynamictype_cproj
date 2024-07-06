@@ -5,7 +5,7 @@
 #ifndef DYNAMICTYPE_H
 #define DYNAMICTYPE_H
 
-#include <hash.h>
+#include <lista_se.h>
 
 /**
  * @brief Struct that represents a field of a dynamic type
@@ -21,8 +21,7 @@ typedef struct Field {
  */
 typedef struct DynamicType {
     char name[20]; /** Name of the dynamic type */
-    tTabelaHash *fields; /** Fields of the dynamic type */
-    unsigned n_fields; /** Number of fields */
+    tLSE *fields; /** Fields of the dynamic type */
 } tDynamicType;
 
 /**
