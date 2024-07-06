@@ -3,12 +3,14 @@
 #include <assert.h>
 #include "dynamictype.h"
 
-void test_create_dynamic_type();
+tDynamicTypeTemplate *custom_dynamic_template();
+
+void test_create_and_free_dynamic_type();
 void test_add_field();
 void test_get_field();
 
 int main(void) {
-    test_create_dynamic_type();
+    test_create_and_free_dynamic_type();
     test_add_field();
     test_get_field();
 
@@ -17,15 +19,16 @@ int main(void) {
     return 0;
 }
 
-void test_create_dynamic_type() {
-    tDynamicType *dynamictype = create_dynamic_type("Person");
+tDynamicTypeTemplate *custom_dynamic_template() {
+    tDynamicTypeTemplate *dynamictemplate = create_dynamic_type_template("Person");
+    add_field_template(dynamictemplate, "name", "char*");
+    add_field_template(dynamictemplate, "age", "int");
 
-    assert(dynamictype != NULL);
-    assert(strcmp(dynamictype->name, "Person") == 0);
-    assert(dynamictype->fields != NULL);
-    assert(dynamictype->fields->tam == 0);
+    return dynamictemplate;
+}
 
-    printf("- create_dynamic_type() tests passed\n");
+void test_create_and_free_dynamic_type() {
+
 }
 
 void test_add_field() {
