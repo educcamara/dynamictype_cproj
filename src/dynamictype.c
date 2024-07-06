@@ -13,8 +13,15 @@ static int __compare_field_templates(void *a, void *b) {
     return strcmp(field_a->name, field_b->name);
 }
 
-tDinamicTypeTemplate *create_dynamic_type_template(const char *name) {
-    tDinamicTypeTemplate *dynamictype = (tDinamicTypeTemplate *) malloc(sizeof(tDinamicTypeTemplate));
+static int __compare_fields(void *a, void *b) {
+    tField *field_a = (tField *) a;
+    tField *field_b = (tField *) b;
+
+    return strcmp(field_a->template->name, field_b->template->name);
+}
+
+tDynamicTypeTemplate *create_dynamic_type_template(const char *name) {
+    tDynamicTypeTemplate *dynamictype = (tDynamicTypeTemplate *) malloc(sizeof(tDynamicTypeTemplate));
 
     strncpy(dynamictype->name, name, sizeof(char) * 20);
     dynamictype->fields = criar_lse(__compare_field_templates, NULL);
@@ -22,11 +29,31 @@ tDinamicTypeTemplate *create_dynamic_type_template(const char *name) {
     return dynamictype;
 }
 
-tDynamicType *create_dynamic_type(const char *type_name) {
-    tDynamicType *dynamictype = (tDynamicType *) malloc(sizeof(tDynamicType));
+static tField *__create_field(tFieldTemplate *template, void *data) {
+    tField *field = (tField *) malloc(sizeof(tField));
 
-    strcpy(dynamictype->name, type_name);
+    field->template = template;
+    field->data = data;
+
+    return field;
+}
+
+tDynamicType *create_dynamic_type(tDynamicTypeTemplate *template) {
+    tDynamicType *dynamictype = (tDynamicType *) malloc(sizeof(tDynamicType));
+    if (dynamictype == NULL) { return NULL; }
+
+    dynamictype->template = template;
     dynamictype->fields = criar_lse(__compare_fields, NULL);
+
+    tElem_LSE *aux = template->fields->prim;
+    while (aux != NULL) {
+        tFieldTemplate *field_template = (tFieldTemplate *) aux->carga_util;
+        tField *field = __create_field(field_template, NULL);
+
+        inserir_final_lse(dynamictype->fields, field);
+
+        aux = aux->prox;
+    }
 
     return dynamictype;
 }
