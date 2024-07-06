@@ -85,3 +85,16 @@ unsigned char add_field_data_dynamic_type(tDynamicType *dynamictype, const char 
     field->data = data;
     return 1;
 }
+
+void free_dynamic_type(tDynamicType *dynamictype) {
+    tElem_LSE *aux = dynamictype->fields->prim;
+    while (aux != NULL) {
+        tField *field = (tField *) aux->carga_util;
+        free(field);
+
+        aux = aux->prox;
+    }
+
+    destruir_lse(dynamictype->fields);
+    free(dynamictype);
+}
