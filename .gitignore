@@ -1,3 +1,4 @@
 # Basic Directories
 .idea
 cmake-build-debug
+build
