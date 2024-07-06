@@ -38,8 +38,10 @@ tDynamicType *create_dynamic_type(const char *type_name);
  * @param name The name of the field
  * @param type The type of the field
  * @param data The data of the field
+ *
+ * @return a boolean indicating if the field was added successfully
  */
-void add_field(tDynamicType *dynamictype, char *name, char *type, void *data);
+unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void *data);
 
 /**
  * @brief Gets a field from a dynamic type

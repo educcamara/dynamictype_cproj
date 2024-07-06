@@ -22,8 +22,12 @@ tDynamicType *create_dynamic_type(const char *type_name) {
     return dynamictype;
 }
 
-void add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
+unsigned char add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
     tLSE *fields = dynamictype->fields;
+
+    if (get_field(dynamictype, name) != NULL) {
+        return 0;
+    }
 
     tField *field = (tField *) malloc(sizeof(tField));
     strcpy(field->name, name);
@@ -31,6 +35,7 @@ void add_field(tDynamicType *dynamictype, char *name, char *type, void *data) {
     field->data = data;
 
     inserir_final_lse(fields, field);
+    return 1;
 }
 
 void *get_field(tDynamicType *dynamictype, const char *name) {
