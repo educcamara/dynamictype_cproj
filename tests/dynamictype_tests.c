@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+
 #include "dynamictype.h"
 
 tDynamicTypeTemplate *custom_dynamic_template();
 
 void test_create_and_free_dynamic_type();
-void test_add_field();
-void test_get_field();
+void teste_get_field();
+void test_add_field_data();
 
 int main(void) {
     test_create_and_free_dynamic_type();
-    test_add_field();
-    test_get_field();
+    teste_get_field();
+    test_add_field_data();
 
     printf("All tests passed\n");
 
@@ -45,39 +46,53 @@ void test_create_and_free_dynamic_type() {
     printf("- create_dynamic_type() and free_dynamic_type() tests passed\n");
 }
 
-void test_add_field() {
-    tDynamicType *dynamictype = create_dynamic_type("Person");
-    add_field(dynamictype, "name", "char*", "John Doe");
-
-    assert(dynamictype->fields->tam == 1);
-    tField *field = (tField *) dynamictype->fields->prim->carga_util;
-    assert(strcmp(field->name, "name") == 0);
-    assert(strcmp(field->type, "char*") == 0);
-    assert(strcmp(field->data, "John Doe") == 0);
-
-    int num = 30;
-    add_field(dynamictype, "age", "int", &num);
-
-    assert(dynamictype->fields->tam == 2);
-    field = (tField *) dynamictype->fields->ult->carga_util;
-    assert(strcmp(field->name, "age") == 0);
-    assert(strcmp(field->type, "int") == 0);
-    assert(*(int *) field->data == 30);
-
-    printf("- add_field() tests passed\n");
-}
-
-void test_get_field() {
-    tDynamicType *dynamictype = create_dynamic_type("Person");
-    add_field(dynamictype, "name", "char*", "John Doe");
+void teste_get_field() {
+    tDynamicTypeTemplate *dynamictemplate = custom_dynamic_template();
+    tDynamicType *dynamictype = create_dynamic_type(dynamictemplate);
 
     tField *field = get_field_dynamic_type(dynamictype, "name");
     assert(field != NULL);
-    assert(strcmp(field->name, "name") == 0);
-    assert(strcmp(field->type, "char*") == 0);
-    assert(strcmp(field->data, "John Doe") == 0);
+    assert(strcmp(field->template->name, "name") == 0);
+    assert(field->data == NULL);
 
-    assert(get_field_dynamic_type(dynamictype, "age") == NULL);
+    field = get_field_dynamic_type(dynamictype, "age");
+    assert(field != NULL);
+    assert(strcmp(field->template->name, "age") == 0);
+    assert(field->data == NULL);
 
-    printf("- get_field() tests passed\n");
+    field = get_field_dynamic_type(dynamictype, "not_found");
+    assert(field == NULL);
+
+    free_dynamic_type(dynamictype);
+    free_dynamic_type_template(dynamictemplate);
+
+    printf("- get_field_dynamic_type() tests passed\n");
 }
+
+void test_add_field_data() {
+    tDynamicTypeTemplate *dynamictemplate = custom_dynamic_template();
+    tDynamicType *dynamictype = create_dynamic_type(dynamictemplate);
+
+    char str[20] = "Eduardo";
+    unsigned char res = add_field_data_dynamic_type(dynamictype, "name", str);
+
+    assert(res == 1);
+    tField *field = get_field_dynamic_type(dynamictype, "name");
+    assert(strcmp((char*) field->data, str) == 0);
+
+    int age = 24;
+    res = add_field_data_dynamic_type(dynamictype, "age", &age);
+
+    assert(res == 1);
+    field = get_field_dynamic_type(dynamictype, "age");
+    assert(*(int*) field->data == age);
+
+    res = add_field_data_dynamic_type(dynamictype, "not_found", NULL);
+    assert(res == 0);
+
+    free_dynamic_type(dynamictype);
+    free_dynamic_type_template(dynamictemplate);
+
+    printf("- add_field_data_dynamic_type() tests passed\n");
+}
+
