@@ -10,9 +10,11 @@
 #include "dynamictype.h"
 
 void test_create_and_free_dynamic_type_template();
+void test_add_field_template();
 
 int main(void) {
     test_create_and_free_dynamic_type_template();
+    test_add_field_template();
 
     printf("All tests passed on dynamictypetemplate_tests\n");
     return 0;
@@ -38,4 +40,25 @@ void test_create_and_free_dynamic_type_template() {
     free_dynamic_type_template(dynamictype2);
 
     printf("- create_dynamic_type_template() tests passed\n");
+}
+
+void test_add_field_template() {
+    tDynamicTypeTemplate *dynamictemplate = create_dynamic_type_template("Person");
+    add_field_template(dynamictemplate, "name", "char*");
+
+    assert(dynamictemplate->fields->tam == 1);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->prim->carga_util)->name, "name") == 0);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->prim->carga_util)->type, "char*") == 0);
+
+    add_field_template(dynamictemplate, "age", "int");
+
+    assert(dynamictemplate->fields->tam == 2);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->prim->carga_util)->name, "name") == 0);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->prim->carga_util)->type, "char*") == 0);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->ult->carga_util)->name, "age") == 0);
+    assert(strcmp(((tFieldTemplate *) dynamictemplate->fields->ult->carga_util)->type, "int") == 0);
+
+    free_dynamic_type_template(dynamictemplate);
+
+    printf("- add_field_template() tests passed\n");
 }
